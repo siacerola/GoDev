@@ -17,7 +17,7 @@ const dbName = "devDB"
 const mongoUri = "mongodb://127.0.0.1:27017"
 
 db.connectDB(
-    mongoUri,
+    process.env.MONGO_URI,
     dbName
 )
 
