@@ -23,16 +23,17 @@ const insertOne = async (
     let status = ""
     if (newRole === saveRole) status = "successully saved"
     else status = "failed to saved"
-    
-    res.status(statusCode).json({
-        message: `${newRole.roleName} ${status}`,
-        statusCode:statusCode
-    })
+
+    response.insertOne(
+        statusCode,
+        newRole.roleName,
+        status,
+        res
+    )
 }
 
 const findAllRole = async (
     statusCode,
-    message,
     res
 ) => {
     const queryFindAll = {}
@@ -47,8 +48,8 @@ const findAllRole = async (
 
     response.findAll(
         statusCode,
-        message,
-        findAll
+        findAll,
+        res
     )
 
 
