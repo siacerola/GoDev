@@ -27,6 +27,7 @@ router.route("/")
     .get((req, res) => {
         UserModel.findAllUser(
             200,
+            _.upperCase("get user model"),
             res
         )
     })

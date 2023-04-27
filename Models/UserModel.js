@@ -60,16 +60,13 @@ const insertOne = async (
 
 const findAll = async (
     statusCode,
+    message,
     res
 ) => {
     const queryFind = {}
     const queryOption = {
         __v:0
     }
-
-    const findAllUsers = await User.find(
-        queryFind
-    )
 
     const findAllUser = await User.find(
         queryFind,
@@ -79,6 +76,7 @@ const findAll = async (
     response.findAll(
         statusCode,
         findAllUser,
+        message,
         res
     )
 }

@@ -17,6 +17,7 @@ router.route("/")
     .get((req, res) => {
         UserRoleModel.findAllRole(
             200,
+            _.upperCase("get user role model"),
             res
         )
     })

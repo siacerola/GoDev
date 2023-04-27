@@ -34,6 +34,7 @@ const insertOne = async (
 
 const findAll = async (
     statusCode,
+    message,
     res
 ) => {
     const queryFindAll = {}
@@ -49,6 +50,7 @@ const findAll = async (
     response.findAll(
         statusCode,
         findAllRole,
+        message,
         res
     )
 }
