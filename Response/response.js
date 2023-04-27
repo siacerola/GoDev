@@ -5,7 +5,7 @@ const findAll = (
 ) => {
 
     res.status(statusCode).json({
-        roleName: itemList,
+        itemList: itemList,
         message: "successfully get all user role model",
         statusCode
     })

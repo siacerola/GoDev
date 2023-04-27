@@ -9,7 +9,7 @@ const roleSchema = new Schema({
     }
 })
 
-const Role = mongoose.model("role", roleSchema)
+const Role = mongoose.model("Role", roleSchema)
 
 const insertOne = async (
     statusCode,
@@ -32,7 +32,7 @@ const insertOne = async (
     )
 }
 
-const findAllRole = async (
+const findAll = async (
     statusCode,
     res
 ) => {
@@ -41,14 +41,14 @@ const findAllRole = async (
         __v:0
     }
 
-    const findAll = await Role.find(
+    const findAllRole = await Role.find(
         queryFindAll,
         queryOption
     )
 
     response.findAll(
         statusCode,
-        findAll,
+        findAllRole,
         res
     )
 }
@@ -116,7 +116,7 @@ const findAndUpdate = async (
 
 module.exports = {
     insertRole: insertOne,
-    findAllRole: findAllRole,
+    findAllRole: findAll,
     deleteRole: deleteOne,
     findAndUpdateRole:findAndUpdate
 }

@@ -58,6 +58,99 @@ const insertOne = async (
     )
 }
 
+const findAll = async (
+    statusCode,
+    res
+) => {
+    const queryFind = {}
+    const queryOption = {
+        __v:0
+    }
+
+    const findAllUsers = await User.find(
+        queryFind
+    )
+
+    const findAllUser = await User.find(
+        queryFind,
+        queryOption
+    ).populate('roleId',queryOption).exec()
+
+    response.findAll(
+        statusCode,
+        findAllUser,
+        res
+    )
+}
+
+const deleteOne = async (
+    statusCode,
+    userId,
+    res
+) => {
+    const queryFind = { _id: userId }
+    const queryOption = {
+        rawResult:true
+    }
+
+    const deleteUser = await User.findByIdAndDelete(
+        queryFind,
+        queryOption
+    )
+
+    let status = ""
+    if (deleteUser.value!=null) status = "successully deleted"
+    else status = "failed delete"
+
+    response.deleteOne(
+        statusCode,
+        deleteUser.userName,
+        status,
+        res
+    )
+}
+
+const findAndUpdate = async (
+    statusCode,
+    userId,
+    userName,
+    password,
+    email,
+    phoneNumber,
+    roleId,
+    res
+) => {
+    const queryFind = { _id: userId }
+    const queryUpdate = {
+        userName: userName,
+        userPassword: password,
+        userEmail: email,
+        userPhoneNumber: phoneNumber,
+        roleId:roleId
+    }
+    const queryOption = {
+        rawResult:true
+    }
+    const updateUser = await User.findByIdAndUpdate(
+        queryFind,
+        queryUpdate,
+        queryOption
+    ).exec()
+
+    let status = ""
+    if (updateUser.lastErrorObject.updatedExisting === true) status = "successully update"
+    else status = "failed update"
+
+    response.findAndUpdate(
+        statusCode,
+        status,
+        res
+    )
+}
+
 module.exports = {
-    insertUser:insertOne
+    insertUser: insertOne,
+    findAllUser: findAll,
+    deleteUser: deleteOne,
+    findAndUpdateUser:findAndUpdate
 }
