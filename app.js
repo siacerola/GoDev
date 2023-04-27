@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 
+require('dotenv').config()
 const db = require('./connection')
 
 const RoleRoute = require('./Routes/RoleRoute')
@@ -13,13 +14,10 @@ app.use(
 
 const PORT = process.env.PORT || 3000
 
-const dbName = "devDB"
+const dbName = "GoDevDB"
 const mongoUri = "mongodb://127.0.0.1:27017"
 
-db.connectDB(
-    process.env.MONGO_URI,
-    dbName
-)
+db.connectDB()
 
 app.use('/role', RoleRoute)
 
