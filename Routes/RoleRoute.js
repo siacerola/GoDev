@@ -14,4 +14,12 @@ router.route("/")
         )
     })
 
+    .get((req, res) => {
+        UserRoleModel.findAllRole(
+            200,
+            `successfully get all role user model`,
+            res
+        )
+    })
+
 module.exports = router

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
+const response = require('../Response/response')
 
 const roleSchema = new Schema({
     roleName: {
@@ -29,6 +30,31 @@ const insertOne = async (
     })
 }
 
+const findAllRole = async (
+    statusCode,
+    message,
+    res
+) => {
+    const queryFindAll = {}
+    const queryOption = {
+        __v:0
+    }
+
+    const findAll = await Role.find(
+        queryFindAll,
+        queryOption
+    )
+
+    response.findAll(
+        statusCode,
+        message,
+        findAll
+    )
+
+
+}
+
 module.exports = {
-    insertRole:insertOne
+    insertRole: insertOne,
+    findAllRole:findAllRole
 }
