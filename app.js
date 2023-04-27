@@ -5,6 +5,7 @@ require('dotenv').config()
 const db = require('./connection')
 
 const RoleRoute = require('./Routes/RoleRoute')
+const UserRoute = require('./Routes/UserRoute')
 
 const app = express()
 
@@ -20,6 +21,8 @@ const mongoUri = "mongodb://127.0.0.1:27017"
 db.connectDB()
 
 app.use('/role', RoleRoute)
+app.use('/user', UserRoute)
+
 
 db.connectDB(
     mongoUri,
