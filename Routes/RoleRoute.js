@@ -21,4 +21,24 @@ router.route("/")
         )
     })
 
+    .delete((req, res) => {
+        const roleId = req.body.roleId
+        UserRoleModel.deleteRole(
+            200,
+            roleId,
+            res
+        )
+    })
+
+    .patch((req, res) => {
+        const roleId = req.body.roleId
+        const roleName = _.upperCase(req.body.roleName)
+        UserRoleModel.findAndUpdateRole(
+            200,
+            roleId,
+            roleName,
+            res
+        )
+    })
+
 module.exports = router
