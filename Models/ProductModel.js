@@ -28,7 +28,7 @@ const insertOne = async (
     const saveProdct = await newProdct.save()
 
     let status = ""
-    if (newRole === saveRole) status = "successully saved"
+    if (newProdct === saveProdct) status = "successully saved"
     else status = "failed to saved"
 
     response.insertOne(
@@ -39,11 +39,32 @@ const insertOne = async (
     )
 }
 
-const findAll = async () => {
-    
+const findAll = async (
+    statusCode,
+    message,
+    res
+) => {
+    const queryFind = {}
+    const queryOption = {
+        __v:0
+    }
+
+    const findAllProduct = await Product.find(
+        queryFind,
+        queryOption
+    )
+
+    response.findAll(
+        statusCode,
+        findAllProduct,
+        message,
+        res
+    )
 }
 
-const deleteOne = async () => {
+const deleteOne = async (
+    
+) => {
     
 }
 

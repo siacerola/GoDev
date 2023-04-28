@@ -25,7 +25,7 @@ db.connectDB()
 app.use('/role', RoleRoute)
 app.use('/user', UserRoute)
 app.use('/sales', SalesRoute)
-app.use('/', ProductRoute)
+app.use('/product', ProductRoute)
 
 
 
