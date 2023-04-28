@@ -6,7 +6,8 @@ const db = require('./connection')
 
 const RoleRoute = require('./Routes/RoleRoute')
 const UserRoute = require('./Routes/UserRoute')
-const SalesRote = require('./Routes/SalesRoute')
+const SalesRoute = require('./Routes/SalesRoute')
+const ProductRoute = require('./Routes/ProdctRoute')
 
 const app = express()
 
@@ -23,7 +24,9 @@ db.connectDB()
 
 app.use('/role', RoleRoute)
 app.use('/user', UserRoute)
-app.use('/sales', SalesRote)
+app.use('/sales', SalesRoute)
+app.use('/', ProductRoute)
+
 
 
 db.connectDB(
