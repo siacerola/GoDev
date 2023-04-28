@@ -16,5 +16,36 @@ router.route('/')
         )
     })
 
+    .get((req, res) => {
+        SalesModel.findAllSales(
+            200,
+            _.upperCase("get sales model"),
+            res
+        )
+    })
+
+    .delete((req, res) => {
+        const salesId = req.body.salesId
+        SalesModel.deleteSales(
+            200,
+            salesId,
+            res
+        )
+    })
+
+    .patch((req, res) => {
+        const salesId = req.body.salesId
+        const salesName = _.upperCase(req.body.salesName)
+        const salesPhoneNumber = req.body.salesPhoneNumber
+
+        SalesModel.findAndUpdateSales(
+            200,
+            salesId,
+            salesName,
+            salesPhoneNumber,
+            res
+        )
+    })
+
 module.exports = router
     
