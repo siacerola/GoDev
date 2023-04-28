@@ -2,12 +2,12 @@ const express = require('express')
 const router = express.Router()
 const _ = require('lodash')
 
-const UserRoleModel = require('../Models/RoleModel')
+const RoleModel = require('../Models/RoleModel')
 
 router.route("/")
     .post((req, res) => {
         const roleName = _.upperCase(req.body.roleName)
-        UserRoleModel.insertRole(
+        RoleModel.insertRole(
             200,
             roleName,
             res
@@ -15,7 +15,7 @@ router.route("/")
     })
 
     .get((req, res) => {
-        UserRoleModel.findAllRole(
+        RoleModel.findAllRole(
             200,
             _.upperCase("get user role model"),
             res
@@ -24,7 +24,7 @@ router.route("/")
 
     .delete((req, res) => {
         const roleId = req.body.roleId
-        UserRoleModel.deleteRole(
+        RoleModel.deleteRole(
             200,
             roleId,
             res
@@ -34,7 +34,7 @@ router.route("/")
     .patch((req, res) => {
         const roleId = req.body.roleId
         const roleName = _.upperCase(req.body.roleName)
-        UserRoleModel.findAndUpdateRole(
+        RoleModel.findAndUpdateRole(
             200,
             roleId,
             roleName,
