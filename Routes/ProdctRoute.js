@@ -6,12 +6,12 @@ const ProductModel = require('../Models/ProductModel')
 
 router.route('/')
     .post((req, res) => {
-        const prodctName = _.upperCase(req.body.productName)
+        const productName = _.upperCase(req.body.productName)
         const productType = _.upperCase(req.body.productType)
 
         ProductModel.insertProdct(
             200,
-            prodctName,
+            productName,
             productType,
             res
         )
@@ -30,6 +30,20 @@ router.route('/')
         ProductModel.deleteProdct(
             200,
             productId,
+            res
+        )
+    })
+
+    .patch((req, res) => {
+        const productId = req.body.productId
+        const productName = _.upperCase(req.body.productName)
+        const productType = _.upperCase(req.body.productType)
+
+        ProductModel.findAndUpdateProdct(
+            200,
+            productId,
+            productName,
+            productType,
             res
         )
     })

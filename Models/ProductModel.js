@@ -89,8 +89,40 @@ const deleteOne = async (
     )
 }
 
-const findAndUpdate = async () => {
-    
+const findAndUpdate = async (
+    statusCode,
+    idProduct,
+    productName,
+    productType,
+    res
+) => {
+    const queryFind = { _id: idProduct }
+    const queryUpdate = {
+        productName: productName,
+        productType: productType
+        
+    }
+    const queryOption = {
+        rawResult: true
+        
+    }
+
+    const updateProduct = await Product.findByIdAndUpdate(
+        queryFind,
+        queryUpdate,
+        queryOption
+    ).exec()
+
+    let status = ""
+    if (updateProduct.lastErrorObject.updatedExisting === true) status = "successully update"
+    else status = "failed update"
+
+    response.findAndUpdate(
+        statusCode,
+        status,
+        res
+    )
+
 }
 
 module.exports = {
