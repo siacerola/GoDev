@@ -25,5 +25,15 @@ router.route('/')
         )
     })
 
+    .delete((req, res) => {
+        const productId = req.body.productId
+        ProductModel.deleteProdct(
+            200,
+            productId,
+            res
+        )
+    })
+
+
 
 module.exports = router

@@ -63,9 +63,30 @@ const findAll = async (
 }
 
 const deleteOne = async (
-    
+    statusCode,
+    idProduct,
+    res
 ) => {
-    
+    const queryFind = { _id: idProduct }
+    const queryOption = {
+        rawResult:true
+    }
+
+    const deleteProdct = await Product.findByIdAndDelete(
+        queryFind,
+        queryOption
+    ).exec()
+
+    let status = ""
+    if (deleteProdct.value != null) status = "successully delete"
+    else status = "failed delete"
+
+    response.deleteOne(
+        statusCode,
+        deleteProdct.value.productName,
+        status,
+        res
+    )
 }
 
 const findAndUpdate = async () => {
