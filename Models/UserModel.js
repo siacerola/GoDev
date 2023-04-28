@@ -21,8 +21,15 @@ const userSchema = new Schema({
     },
     roleId: {
         type: Schema.Types.ObjectId,
-        ref:"Role"
+        ref: "Role"
     }
+})
+
+userSchema.virtual('roleName', {
+    ref: 'Role',
+    localField: 'roleId',
+    foreignField: '_id',
+    justOne:true
 })
 
 
@@ -42,7 +49,7 @@ const insertOne = async (
     newUser.userPassword = password
     newUser.userEmail = email
     newUser.userPhoneNumber = phoneNumber
-    newUser.roleId = roleId
+    newUser.role = roleId
     
     const saveUser = await newUser.save()
 
@@ -64,14 +71,11 @@ const findAll = async (
     res
 ) => {
     const queryFind = {}
-    const queryOption = {
-        __v:0
-    }
 
-    const findAllUser = await User.find(
-        queryFind,
-        queryOption
-    ).populate('roleId',queryOption).exec()
+    const findAllUser = await User.find(queryFind)
+        .populate('roleId', 'roleName -_id')
+        .lean()
+        .select('userName userPassword userEmail userPhoneNumber roleId')
 
     response.findAll(
         statusCode,
